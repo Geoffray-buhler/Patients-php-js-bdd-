@@ -1,0 +1,13 @@
+body{
+    background-image: url(./assets/teranga-fer.jpg);
+}
+
+.image-accueil{
+    width: 500px;
+    height: 500px;
+}
+
+.image-carousel{
+    width: 800px;
+    height: 500px;
+}
