@@ -10,8 +10,7 @@
     <title>L'hopital velpo</title>
     <!-- Css bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/autocomplete.css">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
 <!-- NavBar avec image -->
@@ -30,47 +29,26 @@
                     <h3 class="text-center">Prise de RDV</h3> 
                     <input type="date" class="form-control m-3" name="dateRDV" placeholder="Date du RDV">
                     <input type="time" min="07:00" max="19:30" required class="form-control m-3" name="HeureRDV" placeholder="Heure du RDV">
-                    <input class="form-control m-3" name="id" data-autocomplete="search.php" />
+                    <input class="form-control d-none m-3 hidden" name="id"/>
+                    <my-autocomplete class="form-control m-3" limit-value=0 query-url="search.php" query-field="q"></my-autocomplete>
                     <button type="submit" class="btn btn-primary ml-5">Enregistrer</button>
                     <div>
                 </form>
             </div>
         </div>
     </div> 
-    <script type="text/javascript" src="./js/autocomplete.js"></script>
+    <script type="text/javascript" src="./js/MyAutocompletion.js"></script>
     <script type="text/javascript">
-    AutoComplete({Delay: 300, EmptyMessage: "Oh Shit ! No results ! Tou foutch mon gueule !", Limit: 20, MinChars: 0, 
-        _Post: function(response) {
-            try {
-                var returnResponse = [];
-
-                //JSON return
-                var json = JSON.parse(response);
-
-
-                if (Object.keys(json).length === 0) {
-                    return "";
-                }
-
-                if (Array.isArray(json)) {
-                    for (var i = 0 ; i < Object.keys(json).length; i++) {
-                        returnResponse[returnResponse.length] = { "Value": json[i].id, "Label": this._Highlight(json[i].firstname) };
-                    }
-                } else {
-                    for (var value in json) {
-                        returnResponse.push({
-                            "Value": value,
-                            "Label": this._Highlight(json[value])
-                        });
-                    }
-                }
-
-                return returnResponse;
-            } catch (event) {
-                //HTML return
-                return response;
-            }
-        },});
+     const $autoComp = document.querySelector('my-autocomplete');
+        $autoComp.addEventListener('select', (evt) => {
+            const patient = evt.detail.patient;
+            $inputHidden = document.querySelector('.hidden');
+            $inputHidden.value = patient.id;
+            console.log(patient);
+        })
+        $autoComp._Format = function(item){
+            return item.firstname + ' ' + item.lastname;
+        }
 </script>
 </body>
 </html>
