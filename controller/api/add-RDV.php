@@ -15,6 +15,6 @@ if(isset($_POST['dateRDV']) and isset($_POST['HeureRDV']))
     $res = $stmt-> execute(array($_POST['dateRDV'].' '.$_POST['HeureRDV'].':00',$_POST['id']));
 };
 
-header('Location:./liste-patient.php');
+header('Location:../liste-patient.php');
 exit();
 ?>

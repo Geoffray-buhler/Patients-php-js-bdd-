@@ -9,9 +9,9 @@ catch(Exception $e)
     die('Erreur: ' . $e->getMessage());
 }
 
-    $stmt = $bdd -> prepare("DELETE FROM patients WHERE id=?");
+    $stmt = $bdd -> prepare("DELETE FROM appointments WHERE id=?");
     $res = $stmt-> execute(array($_REQUEST['id']));
 
-header('Location:./liste-patients.php');
+header('Location:/SitePatiens/index.php?action=liste-rendezvous');
 exit();
 ?>

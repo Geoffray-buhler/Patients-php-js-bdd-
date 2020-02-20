@@ -4,7 +4,7 @@ try
     $bdd = new PDO('mysql:host=localhost:3306;dbname=hospitale2n;charset=utf8','root','');
     $bdd->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 }
-catch(Exeption $e)
+catch(Exception $e)
 {
     die('Erreur: ' . $e->getMessage());
 }
@@ -15,6 +15,6 @@ if(isset($_POST['lastname']) and isset($_POST['firstname'])and isset($_POST['bir
     $res = $stmt-> execute(array($_POST["lastname"],$_POST["firstname"],$_POST["birthdate"],$_POST["phone"],$_POST["mail"]));
 }
 
-header('Location:./index.php');
+header('Location:/SitePatiens/index.php');
 exit();
 ?>
